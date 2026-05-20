@@ -51,7 +51,7 @@ resultados <- list(data = dados,  #dados usados
                    estimativas = broom::tidy(model),
                    residuos = broom::glance(model))
 
-saveRDS(resultados, file = paste0(dir, 'Resultados/ML1_', run_date, '.rds'))
+saveRDS(resultados, file = paste0(dir, 'Results/ML1_', run_date, '.rds'))
 
 
 
@@ -142,13 +142,13 @@ MCMCvis::MCMCdiag(resultados,
                   round = 3,
                   file_name = paste0('ML_jags-', run_date),
                   dir = paste0(dir),
-                  mkdir = paste0('ML_jags-', run_date),
+                  mkdir = paste0('Results/ML_jags-', run_date),
                   pg0 = TRUE,
                   save_obj = TRUE,
                   obj_name = paste0('model_fit-', run_date),
                   add_obj = list(dados),
                   add_obj_names = list(paste0('data-', run_date)),
-                  cp_file = paste0(dir, '1a_modelo_resultados.R'),
+                  cp_file = paste0(dir, 'Scripts/1a_modelo_resultados.R'),
                   cp_file_names = paste0('1a_modelo_resultados_', run_date, '.R'))
 
 
