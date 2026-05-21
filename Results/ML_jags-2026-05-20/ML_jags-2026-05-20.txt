@@ -1,0 +1,17 @@
+Information and diagnostics 
+=========================== 
+Run time (min):                   0 
+Total iter:                       500 
+Burn-in:                          100 
+Thin:                             2 
+Num chains:                       3 
+Max Rhat:                         1.02 
+Min n.eff:                        112 
+
+
+Model summary 
+============= 
+            mean    sd    2.5%     50%   97.5% Rhat n.eff p>0
+beta0     -1.468 0.200  -1.881  -1.462  -1.067 1.00   600   0
+beta1      2.448 0.195   2.067   2.454   2.847 1.01   600   1
+deviance 418.282 2.545 415.437 417.551 424.828 1.02   112   1
