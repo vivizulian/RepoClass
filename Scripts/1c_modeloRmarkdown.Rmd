@@ -1,0 +1,121 @@
+---
+title: "Exemplo de workflow reproduzível"
+author: "Viviane Zulian"
+date: "2026-05-20"
+output:
+  html_document: default
+  word_document: default
+---
+
+### Introdução
+https://yihui.org/rmarkdown/
+
+Este documento demonstra um workflow reproduzível em R utilizando Quarto.
+O objetivo é:
+
+- importar dados,
+- ajustar um modelo linear,
+- visualizar resultados,
+- exportar objetos importantes da análise.
+
+
+-include=FALSE indica que o código será executado, mas nada desse conjuntos 
+de códigos será mostrado no documento final.
+-echo=TRUE controla se o código aparecerá no relatório final. Se estiver FALSE, 
+somente os resultados aparecerão, mas não os códigos.
+
+
+## 1. Carregar pacotes
+
+```{r packages, include=FALSE}
+library(rjags)
+library(MCMCvis)
+library(broom)
+```
+
+# 2. Definir diretório de trabalho
+
+```{r}
+run_date <- Sys.Date()
+dados_date <- '2026-05-22'
+dir <- "~/Documents/RepoClass/"
+```
+
+# 3. Importar dados
+
+```{r}
+dados <- read.csv(paste0(dir, "Data/L0/dados_original-", dados_date, ".csv"))
+```
+
+## Visualização inicial dos dados
+
+```{r}
+head(dados)
+```
+
+# 4. Ajustar modelo linear
+
+O modelo ajustado foi:
+
+```{r}
+model <- lm(y ~ x, data = dados)
+```
+
+# 5. Resumo dos resultados
+
+```{r}
+summary(model)
+```
+
+## Tabela de estimativas
+
+```{r}
+broom::tidy(model)
+```
+
+## Métricas gerais do modelo
+
+```{r}
+broom::glance(model)
+```
+
+# 6. Gráfico
+
+```{r, echo=TRUE}
+plot(dados$x,
+     dados$y,
+     pch = 16,
+     xlab = "x",
+     ylab = "y")
+
+abline(model,
+       col = "red",
+       lwd = 2)
+```
+
+# 7. Exportar resultados
+
+```{r}
+resultados <- list(data = dados,
+                   model = model,
+                   summary = summary(model),
+                   estimativas = broom::tidy(model),
+                   residuos = broom::glance(model))
+
+saveRDS(resultados,
+        file = paste0(dir, "Results/ML1_", run_date, ".rds"))
+```
+
+
+# Conclusão
+
+Este documento integra:
+- código,
+- resultados,
+- figuras,
+- documentação,
+
+em um único workflow reproduzível.
+
+Ao renderizar novamente o documento, todas as análises e figuras são atualizadas automaticamente.
+

@@ -18,13 +18,14 @@ library(MCMCvis)
 # 2.set directory ------------------------------------------------------------
 
 run_date <- Sys.Date()
+dados_date <- '2026-05-22'
 dir <- '~/Documents/RepoClass/'
 
 
 # 3.read in data -------------------------------------------------------------
 
-dados <- read.csv(paste0(dir, 'Data/L0/dados_original.csv'))
-
+dados <- read.csv(paste0(dir, 'Data/L0/dados_original', dados_date, '.csv'))
+head(dados)
 
 # 4.process or analyze the data
 
